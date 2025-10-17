@@ -25,4 +25,3 @@ public record RotinaExerciciosDto(
         Integer ordem
 ) {
 }
-// idrotina, idExercicio, series, repeticoes, e ordem
