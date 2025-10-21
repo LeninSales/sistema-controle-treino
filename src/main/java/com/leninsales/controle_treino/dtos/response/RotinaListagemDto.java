@@ -1,4 +1,4 @@
-package com.leninsales.controle_treino.dtos;
+package com.leninsales.controle_treino.dtos.response;
 
 public record RotinaListagemDto(
 
