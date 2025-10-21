@@ -1,4 +1,4 @@
-package com.leninsales.controle_treino.dtos;
+package com.leninsales.controle_treino.dtos.request;
 
 
 import jakarta.validation.constraints.NotBlank;
@@ -16,5 +16,5 @@ public record RotinaCadastroDto(
 
         @NotNull(message = "A lista de exercicio não pode ser nula.")
         @Size(min = 1, message = "A lista deve conter no minimo um exercicio.")
-        List<RotinaExerciciosCadrastoDto> exercicios) {
+        List<RotinaExerciciosCadastroDto> exercicios) {
 }

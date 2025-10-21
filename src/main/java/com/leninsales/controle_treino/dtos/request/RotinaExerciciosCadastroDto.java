@@ -1,4 +1,4 @@
-package com.leninsales.controle_treino.dtos;
+package com.leninsales.controle_treino.dtos.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
