@@ -9,4 +9,6 @@ import java.util.UUID;
 
 public interface RotinaRepository extends JpaRepository<RotinaModel, Integer> {
     List<RotinaListagemDto> findRotinaListagemDtoByIdUsuario(UUID idUsuario);
+
+    List<RotinaModel> findByIdUsuario(UUID idUsuario);
 }
