@@ -21,8 +21,9 @@ public class RotinaExercicioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idRotinaExercicio;
 
-    @NotNull(message = "O id da rotina precisa ser informado.")
-    private Integer idRotina;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_rotina", nullable = false)
+    private RotinaModel rotina;
 
     @NotNull(message = "O id do exercicio precisa ser informado.")
     private Integer idExercicio;
