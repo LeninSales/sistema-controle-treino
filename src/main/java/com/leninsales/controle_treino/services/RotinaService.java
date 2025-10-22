@@ -82,7 +82,13 @@ public class RotinaService {
         for (RotinaModel rotina : rotinas) {
             List<RotinaExercicioModel> exercicios = rotinaExercicioRepository.findByIdRotina(rotina.getIdRotina());
 
-            List<RotinaExerciciosListagemResponseDto> exerciciosDto = exercicios.stream().map(e -> new RotinaExerciciosListagemResponseDto(e.getExercicio().getNome(), e.getSeries(), e.getRepeticoes(), e.getOrdem())).toList();
+            List<RotinaExerciciosListagemResponseDto> exerciciosDto = exercicios.stream()
+                    .map(e -> new RotinaExerciciosListagemResponseDto(
+                            e.getExercicio().getNome(),
+                            e.getSeries(),
+                            e.getRepeticoes(),
+                            e.getOrdem()))
+                    .toList();
 
             repostas.add(new RotinaListagemNomesEExerciciosDto(rotina.getIdRotina(), rotina.getNome(), exerciciosDto));
         }
@@ -90,16 +96,36 @@ public class RotinaService {
     }
 
 
-    public RotinaModel atualizarRotina(Integer id, RotinaDto rotinaDto) {
-        RotinaModel rotina = repository.findById(id).orElseThrow(() -> new NoSuchElementException("Rotina não encontrada."));
+    public RotinaListagemNomesEExerciciosDto listarNomeEExerciciosDeUmaRotina(Integer idRotina) {
+        RotinaModel rotina = repository.findById(idRotina)
+                .orElseThrow(() -> new NoSuchElementException("Rotina não encontrada."));
+
+        List<RotinaExerciciosListagemResponseDto> exerciciosDto = rotina.getExercicios().stream()
+                .map(e -> new RotinaExerciciosListagemResponseDto(
+                        e.getExercicio().getNome(),
+                        e.getSeries(),
+                        e.getRepeticoes(),
+                        e.getOrdem()))
+                .toList();
+
+
+        return new RotinaListagemNomesEExerciciosDto(rotina.getIdRotina(), rotina.getNome(), exerciciosDto);
+    }
+
+    public RotinaModel atualizarRotina(Integer idRotina, RotinaDto rotinaDto) {
+        RotinaModel rotina = repository.findById(idRotina).orElseThrow(() -> new NoSuchElementException("Rotina não encontrada."));
+
         BeanUtils.copyProperties(rotinaDto, rotina, "id_rotina");
+
         return repository.save(rotina);
     }
+
 
     public void deletarRotina(Integer id) {
         if (!repository.existsById(id)) {
             throw new NoSuchElementException("Rotina não encontrada para exclusão.");
         }
+
         repository.deleteById(id);
     }
 
