@@ -1,7 +1,6 @@
 package com.leninsales.controle_treino.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-//adicionar as validaçoes nos atributos para nao ter models anemicos
+
 public class RotinaExercicioModel {
 
     @Id
@@ -25,8 +24,9 @@ public class RotinaExercicioModel {
     @JoinColumn(name = "id_rotina", nullable = false)
     private RotinaModel rotina;
 
-    @NotNull(message = "O id do exercicio precisa ser informado.")
-    private Integer idExercicio;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_exercicio", nullable = false)
+    private ExercicioModel exercicio;
 
     private Integer series;
 
